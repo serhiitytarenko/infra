@@ -1,0 +1,9 @@
+[submodule "nginx"]
+	path = nginx
+	url = git@github.com:serhiitytarenko/nginx.git
+[submodule "web"]
+	path = web
+	url = git@github.com:serhiitytarenko/web.git
+[submodule "api"]
+	path = api
+	url = git@github.com:serhiitytarenko/api.git
