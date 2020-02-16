@@ -1,0 +1,87 @@
+version: "3"
+services:
+  nginx:
+    restart: always
+    build: ./nginx/
+    ports:
+      - "80:80"
+    links:
+      - inst1:inst1
+      - inst2:inst2
+      - inst3:inst3
+      - inst4:inst4
+      # - api1:api1
+      # - api2:api2    
+
+  inst1:
+    restart: always
+    build: ./django-app
+    env_file: .env
+    expose:
+      - "8000"
+    links:
+      # - postgres:postgres
+      - redis:redis
+    volumes:
+      - ./django-app:/opt/nestor/src
+
+  inst2:
+    restart: always
+    build: ./django-app
+    env_file: .env
+    expose:
+      - "8000"
+    links:
+      # - postgres:postgres
+      - redis:redis
+    volumes:
+      - ./django-app:/opt/nestor/src
+
+  inst3:
+    restart: always
+    build: ./django-app
+    env_file: .env
+    expose:
+      - "8000"
+    links:
+      # - postgres:postgres
+      - redis:redis  
+    volumes:
+      - ./django-app:/opt/nestor/src
+
+  inst4:
+    restart: always
+    build: ./django-app
+    env_file: .env
+    expose:
+      - "8000"
+    links:
+      # - postgres:postgres
+      - redis:redis           
+    volumes:
+      - ./django-app:/opt/nestor/src
+
+  # api1:
+  #   restart: always
+  #   build: ./api
+  #   expose:
+  #     - "5000"
+
+
+  # api2:
+  #   restart: always
+  #   build: ./api
+  #   expose:
+  #     - "5000"
+
+  postgresql:
+    build: ./postgres
+    volumes:
+      - ./pgdata:/var/lib/nestor/postgresql/data/pgdata
+    ports:
+      - "5433:5432"
+
+  redis:
+    restart: always
+    image: redis:latest
+
